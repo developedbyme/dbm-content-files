@@ -40,7 +40,7 @@
 		protected function create_additional_hooks() {
 			//echo("\DbmContentFiles\Plugin::create_additional_hooks<br />");
 			
-			
+			$this->add_additional_hook(new \DbmContentFiles\ChangePostHooks());
 		}
 		
 		protected function create_rest_api_end_points() {
@@ -61,6 +61,9 @@
 			//echo("\DbmContentFiles\Plugin::create_filters<br />");
 
 			$custom_range_filters = new \DbmContentFiles\CustomRangeFilters();
+			
+			//add_filter('wprr/range_query/files', array($custom_range_filters, 'query_files'), 10, 2);
+			add_filter('wprr/range_encoding/file', array($custom_range_filters, 'encode_file'), 10, 2);
 			
 		}
 		
